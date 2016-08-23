@@ -17,6 +17,16 @@ defmodule Exkill.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    # 301 redirect /detail/:id to /kill/:id
+    # 301 redirect /detail/:id/:pageview to /kill/:id/:pageview
+    # /kill/:id/:pageview --- what's pageview do?
+    get "/kill/:id", KillController, :show
+
+    get "/kills", KillController, :index
+    get "/kills/page/:page", KillController, :index
+    get "/kills/:type", KillController, :index # can these be combined?
+    get "/kills/:type/page/:page", KillController, :index
   end
 
   # Other scopes may use custom stacks.
