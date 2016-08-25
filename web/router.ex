@@ -19,7 +19,9 @@ defmodule Exkill.Router do
     get "/", PageController, :index
 
     # 301 redirect /detail/:id to /kill/:id
+    get "/detail/:id", KillController, :show_redirect
     # 301 redirect /detail/:id/:pageview to /kill/:id/:pageview
+    get "/detail/:id/:pageview", KillController, :show_redirect
     # /kill/:id/:pageview --- what's pageview do?
     get "/kill/:id", KillController, :show
 

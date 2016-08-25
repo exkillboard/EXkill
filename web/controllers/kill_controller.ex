@@ -25,4 +25,15 @@ defmodule Exkill.KillController do
   def show(conn, %{"id" => id}) do
     render conn, "show.html"
   end
+
+
+  # GET /detail/:id
+  def show_redirect(conn, %{"id" => id}) do
+    redirect conn, to: "/kill/#{id}"
+  end
+
+  # GET /detail/:id/:pageview
+  def show_redirect(conn, %{"id" => id, "pageview" => pageview}) do
+    redirect conn, to: "/kill/#{id}/#{pageview}"
+  end
 end
