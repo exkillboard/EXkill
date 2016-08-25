@@ -6,30 +6,28 @@
 		{% if description is not defined %}
 			{% set description =  siteurl ~ " is a killboard for the Massively Multiplayer Online Role Playing Game (MMORPG) EVE-Online." %}
 		{% endif %}
-		<meta name="description" content="{{ description }}">
-		<meta name="title" content="{{ pageTitle }} | {{ siteurl }}">
+		<!-- TODO --><meta name="description" content="{{ description }}">
+		<!-- TODO --><meta name="title" content="{{ pageTitle }} | {{ siteurl }}">
 		<meta name="keywords" content="eve-online, eve, ccp, ccp games, kills, kill, massively, multiplayer, online, role, playing, game, mmorpg, rank, isk, mmorpg, killboard, zkillboard">
 		<meta name="robots" content="index,follow">
 		<meta name="og:locale" content="en_US">
 		<meta name="og:type" content="website">
-		<meta name="og:site_name" content="{{ siteurl }}">
-		<meta name="fb:app_id" content="{{ fbAppID }}">
+		<!-- TODO --><meta name="og:site_name" content="{{ siteurl }}">
+		<!-- TODO --><meta name="fb:app_id" content="{{ fbAppID }}">
 		<meta name="twitter:site" content="@zKillboard">
-		<meta name="twitter:domain" content="{{ fullsiteurl }}">
-		<meta name="application-name" content="{{ siteurl }}"/>
+		<!-- TODO --><meta name="twitter:domain" content="{{ fullsiteurl }}">
+		<!-- TODO --><meta name="application-name" content="{{ siteurl }}"/>
 		<meta name="msapplication-TileColor" content="#000000"/>
 		<meta name="mobile-web-app-capable" content="yes">
-		<link rel="shortcut icon" sizes="16x17" href="//{{ siteurl }}/favicon.ico" />
-		{% block opengraph %}
-			<meta name="twitter:title" content="{{ pageTitle }} | {{ siteurl }}">
+		<!-- TODO --><link rel="shortcut icon" sizes="16x17" href="//{{ siteurl }}/favicon.ico" />
+			<!-- TODO --><meta name="twitter:title" content="{{ pageTitle }} | {{ siteurl }}">
 			<meta name="twitter:card" content="summary">
-			<meta name="twitter:description" content="{{ description }}">
-			<meta name="twitter:image" content="{{ fullsiteurl }}/img/3D.png">
-			<meta name="og:title" content="{{ siteurl }} / {{ pageTitle }}">
-			<meta name="og:url" content="{{ fullsiteurl }}">
-			<meta name="og:description" content="{{ description }}">
-			<meta name="og:image" content="{{ fullsiteurl }}/img/3D.png">
-		{% endblock %}
+			<!-- TODO --><meta name="twitter:description" content="{{ description }}">
+			<!-- TODO --><meta name="twitter:image" content="{{ fullsiteurl }}/img/3D.png">
+			<!-- TODO --><meta name="og:title" content="{{ siteurl }} / {{ pageTitle }}">
+			<!-- TODO --><meta name="og:url" content="{{ fullsiteurl }}">
+			<!-- TODO --><meta name="og:description" content="{{ description }}">
+			<!-- TODO --><meta name="og:image" content="{{ fullsiteurl }}/img/3D.png">
 
 		{% block robots %}
 		{% endblock %}
@@ -37,39 +35,39 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title>
-			{% block title %}
+			<!-- TODO -->{% block title %}
 				{{ siteurl }}
 			{% endblock %}
 		</title>
 
-		{% if canonical is not defined %}
+		<!-- TODO -->{% if canonical is not defined %}
 			{% set canonical = fullsiteurl ~ requesturi %}
 		{% endif %}
 
-		<link rel="canonical" href="{{ canonical }}">
-		<link rel="search" type="application/opensearchdescription+xml" href="//{{ siteurl }}/xml/zkbsearch.xml" title="search">
+		<!-- TODO --><link rel="canonical" href="{{ canonical }}">
+		<!-- TODO --><link rel="search" type="application/opensearchdescription+xml" href="//{{ siteurl }}/xml/zkbsearch.xml" title="search">
 
-		{% if style == "cyborg" %}
+		<!-- TODO -->{% if style == "cyborg" %}
 			{% set version = "3.1.1" %}
 		{% else %}
 			{% set version = "latest" %}
 		{% endif %}
 
-		{% if style == "default" %}
+		<!-- TODO -->{% if style == "default" %}
 			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 		{% else %}
 			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/{{ version }}/{{ style }}/bootstrap.min.css">
 		{% endif %}
 
-		<link rel="stylesheet" href="//{{ siteurl }}/css/style-edits/{{ style }}-main.css">
-		<link rel="stylesheet" href="//{{ siteurl }}/css/datepicker.css">
-		<link rel="stylesheet" href="//{{ siteurl }}/css/main.css">
+		<!-- TODO --><link rel="stylesheet" href="//{{ siteurl }}/css/style-edits/{{ style }}-main.css">
+		<!-- TODO --><link rel="stylesheet" href="//{{ siteurl }}/css/datepicker.css">
+		<!-- TODO --><link rel="stylesheet" href="//{{ siteurl }}/css/main.css">
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css">
 
 		{% block style %}
 		{% endblock %}
 
-		{% if showAnalytics != false %}
+		<!-- TODO -->{% if showAnalytics != false %}
 			{{ analytics|raw }}
 		{% endif %}
 
@@ -84,7 +82,7 @@
 
 			<!-- The navbar -->
 			<div class="container" style="mgin: 0px; padding: 0px;">
-				{% include "navigationbar.html" %}
+        <%= render "_navigationbar.html", conn: @conn %>
 			</div>
 
 			<div class="container nobackground">
@@ -107,8 +105,8 @@
 
 				<!-- The text header -->
 				{% block header %}{% endblock %}
-				<!-- The actual site content-->
-				{% block content %}Default content{% endblock %}
+        <!-- The actual site content-->
+        <%= render @view_module, @view_template, assigns %>
 
 				<div class="clearfix"></div>
 
@@ -121,7 +119,7 @@
 				{% endif %}
 
 				<!-- Footer -->
-				<div class="hidden-xs">{% include "footer.html" %}</div>
+        <div class="hidden-xs"><%= render "_footer.html", conn: @conn %></div>
 			</div>
 
 			<!-- Modals -->
