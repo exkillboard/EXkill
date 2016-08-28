@@ -12,6 +12,7 @@ defmodule Exkill do
       supervisor(Exkill.Endpoint, []),
       # Start your own worker by calling: Exkill.Worker.start_link(arg1, arg2, arg3)
       # worker(Exkill.Worker, [arg1, arg2, arg3]),
+      worker(MongoPool, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
