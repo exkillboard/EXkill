@@ -18,6 +18,8 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :exkill, :mongo_repos, [Exkill.Mongo]
+
 config :exkill, Exkill.Mongo,
   hostname: "localhost",
   port: 27017,

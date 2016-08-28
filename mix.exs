@@ -17,7 +17,8 @@ defmodule Exkill.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Exkill, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :mongodb, :poolboy]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
+                    :logger, :gettext, :mongodb, :poolboy, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,6 +36,7 @@ defmodule Exkill.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:mongodb, "~> 0.1.1"},
-     {:poolboy, "~> 1.5"}]
+     {:poolboy, "~> 1.5"},
+     {:httpoison, "~> 0.9.0"}]
   end
 end
