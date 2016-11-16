@@ -1,6 +1,7 @@
 # Exkill
 
-A rewrite of [zkillboard](https://github.com/zKillboard/zKillboard)
+A rewrite of [zkillboard](https://github.com/zKillboard/zKillboard) in Elixir to see if it can help in peak.
+
 ## Contributing
 
 First you need to download the whole project
