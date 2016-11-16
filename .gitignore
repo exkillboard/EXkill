@@ -3,6 +3,8 @@
 /db
 /deps
 /*.ez
+/*.sublime-project
+/*.sublime-workspace
 
 # Generated on crash by the VM
 erl_crash.dump
