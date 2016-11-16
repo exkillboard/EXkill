@@ -1,18 +1,41 @@
 # Exkill
 
-To start your Phoenix app:
+A rewrite of [zkillboard](https://github.com/zKillboard/zKillboard)
+## Contributing
 
-  * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phoenix.server`
+First you need to download the whole project
+```sh
+git clone https://github.com/DianaOlympos/EXkill
+cd exkill
+```
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Then you will want to have a MongoDB running and accesible.
+**TODO** : Add Mongo instructions
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+Then you will want to update your database information on the `config/config.exs` file, to supply your own.
+```elixir
+config :exkill, Exkill.Mongo,
+  hostname: "localhost",
+  port: 27017,
+  database: "zkillboard",
+  username: "username",
+  password: "password",
+  pool_size: 20,
+  max_overflow: 5
+```
+You may want to do it in a `config/config.secret.exs`, not tracked by your VCS, that you will import at the bottom of the `config/config.exs` file.
+```elixir
+import_config "config.secret.exs"
+```
 
-## Learn more
+You may want to do the same for your `secret_key_base`, that you can generate with 
+```sh
+mix phoenix.gen.secret
+```
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+**TODO** Seeding the db
+
+
+## Differences with original Zkillboard
+
+Anything that used **mdb.now(delta)** should move to something done by hand that use Mongodb.BSON.DateTime and add the delta by hand.
