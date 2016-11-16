@@ -16,6 +16,7 @@ defmodule Mix.Tasks.Exkill.Mongo.Seed do
 
   @doc false
   def run(_) do
+    Mix.Task.run("app.start")
     app = Mix.Project.config[:app]
 
     repos = Application.get_env(app, :mongo_repos)
