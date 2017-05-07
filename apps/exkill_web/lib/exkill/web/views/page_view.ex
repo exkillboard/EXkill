@@ -1,3 +1,3 @@
-defmodule Exkill.PageView do
-  use Exkill.Web, :view
+defmodule ExkillWeb.PageView do
+  use ExkillWeb.Web, :view
 end

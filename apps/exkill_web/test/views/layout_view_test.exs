@@ -1,3 +1,3 @@
-defmodule Exkill.LayoutViewTest do
-  use Exkill.Web.ConnCase, async: true
+defmodule ExkillWeb.LayoutViewTest do
+  use ExkillWeb.Web.ConnCase, async: true
 end

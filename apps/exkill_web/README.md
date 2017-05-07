@@ -1,4 +1,4 @@
-# Exkill
+# ExkillWeb
 
 A rewrite of [zkillboard](https://github.com/zKillboard/zKillboard) in Elixir to see if it can help in peak.
 
@@ -6,14 +6,14 @@ A rewrite of [zkillboard](https://github.com/zKillboard/zKillboard) in Elixir to
 
 First you need to download the whole project
 ```sh
-git clone https://github.com/DianaOlympos/EXkill
-cd exkill
+git clone https://github.com/DianaOlympos/ExkillWeb
+cd ExkillWeb
 ```
 
 **SOON TM**
 Then you will want to update your database information on the `config/config.exs` file, to supply the one of the project mongo. You will need to ask to get access in the slack channel.
 ```elixir
-config :exkill, Exkill.Mongo,
+config :ExkillWeb, ExkillWeb.Mongo,
   hostname: "the_url",
   port: secret_port,
   database: "zkillboard",

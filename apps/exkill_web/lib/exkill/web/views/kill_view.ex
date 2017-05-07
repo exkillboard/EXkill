@@ -1,3 +1,3 @@
-defmodule Exkill.Web.KillView do
-  use Exkill.Web, :view
+defmodule ExkillWeb.Web.KillView do
+  use ExkillWeb.Web, :view
 end

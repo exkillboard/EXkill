@@ -1,3 +1,3 @@
-defmodule Exkill.Web.LayoutView do
-  use Exkill.Web, :view
+defmodule ExkillWeb.Web.LayoutView do
+  use ExkillWeb.Web, :view
 end

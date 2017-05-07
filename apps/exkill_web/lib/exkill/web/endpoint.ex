@@ -1,14 +1,14 @@
-defmodule Exkill.Web.Endpoint do
-  use Phoenix.Endpoint, otp_app: :exkill
+defmodule ExkillWeb.Web.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ExkillWeb
 
-  socket "/socket", Exkill.Web.UserSocket
+  socket "/socket", ExkillWeb.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :exkill, gzip: false,
+    at: "/", from: :ExkillWeb, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,8 +35,8 @@ defmodule Exkill.Web.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_exkill_key",
+    key: "_ExkillWeb_key",
     signing_salt: "LZqzyj61"
 
-  plug Exkill.Web.Router
+  plug ExkillWeb.Web.Router
 end

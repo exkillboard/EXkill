@@ -1,10 +1,14 @@
-defmodule Exkill.Mixfile do
+defmodule ExkillWeb.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :exkill,
+    [app: :ExkillWeb,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.4",
+     build_path: "../../_build",
+     config_path: "../../config/config.exs",
+     deps_path: "../../deps",
+     lockfile: "../../mix.lock",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -16,7 +20,7 @@ defmodule Exkill.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Exkill, []},
+    [mod: {ExkillWeb, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
                     :logger, :gettext, :mongodb, :poolboy, :httpoison]]
   end

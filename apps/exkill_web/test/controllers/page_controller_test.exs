@@ -1,5 +1,5 @@
-defmodule Exkill.PageControllerTest do
-  use Exkill.Web.ConnCase
+defmodule ExkillWeb.PageControllerTest do
+  use ExkillWeb.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

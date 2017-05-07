@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :exkill, Exkill.Web.Endpoint,
+config :ExkillWeb, ExkillWeb.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hcl0wf5YtS6yp0uqE8MVq0TtWQ0EdlsC9Q3SzTEDZZ8V7fxqeZNqjaIXNCh7VAqu",
-  render_errors: [view: Exkill.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Exkill.PubSub,
+  render_errors: [view: ExkillWeb.Web.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: ExkillWeb.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -18,9 +18,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :exkill, :mongo_repos, [Exkill.Mongo]
+config :ExkillWeb, :mongo_repos, [ExkillWeb.Mongo]
 
-config :exkill, Exkill.Mongo,
+config :ExkillWeb, ExkillWeb.Mongo,
   hostname: "localhost",
   port: 27017,
   database: "zkillboard",

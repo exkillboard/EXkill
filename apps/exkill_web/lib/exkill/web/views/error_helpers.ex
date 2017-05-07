@@ -1,4 +1,4 @@
-defmodule Exkill.Web.ErrorHelpers do
+defmodule ExkillWeb.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Exkill.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Exkill.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(ExkillWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Exkill.Gettext, "errors", msg, opts)
+      Gettext.dgettext(ExkillWeb.Gettext, "errors", msg, opts)
     end
   end
 end

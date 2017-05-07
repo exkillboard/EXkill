@@ -1,3 +1,3 @@
-defmodule Exkill.PageViewTest do
-  use Exkill.Web.ConnCase, async: true
+defmodule ExkillWeb.PageViewTest do
+  use ExkillWeb.Web.ConnCase, async: true
 end

@@ -1,5 +1,5 @@
-defmodule Exkill.Web.Router do
-  use Exkill.Web, :router
+defmodule ExkillWeb.Web.Router do
+  use ExkillWeb.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule Exkill.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Exkill.Web do
+  scope "/", ExkillWeb.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -32,7 +32,7 @@ defmodule Exkill.Web.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Exkill do
+  # scope "/api", ExkillWeb do
   #   pipe_through :api
   # end
 end

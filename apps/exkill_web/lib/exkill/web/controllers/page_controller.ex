@@ -1,5 +1,5 @@
-defmodule Exkill.Web.PageController do
-  use Exkill.Web, :controller
+defmodule ExkillWeb.Web.PageController do
+  use ExkillWeb.Web, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

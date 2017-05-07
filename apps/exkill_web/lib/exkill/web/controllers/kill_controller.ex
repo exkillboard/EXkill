@@ -1,5 +1,5 @@
-defmodule Exkill.Web.KillController do
-  use Exkill.Web, :controller
+defmodule ExkillWeb.Web.KillController do
+  use ExkillWeb.Web, :controller
 
   # GET /kills
   def index(conn, %{}) do

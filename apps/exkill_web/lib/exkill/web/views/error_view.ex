@@ -1,5 +1,5 @@
-defmodule Exkill.Web.ErrorView do
-  use Exkill.Web, :view
+defmodule ExkillWeb.Web.ErrorView do
+  use ExkillWeb.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"
