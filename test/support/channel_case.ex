@@ -1,4 +1,4 @@
-defmodule Exkill.ChannelCase do
+defmodule Exkill.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,7 +22,7 @@ defmodule Exkill.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint Exkill.Endpoint
+      @endpoint Exkill.Web.Endpoint
     end
   end
 

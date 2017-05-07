@@ -6,10 +6,10 @@
 use Mix.Config
 
 # Configures the endpoint
-config :exkill, Exkill.Endpoint,
+config :exkill, Exkill.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hcl0wf5YtS6yp0uqE8MVq0TtWQ0EdlsC9Q3SzTEDZZ8V7fxqeZNqjaIXNCh7VAqu",
-  render_errors: [view: Exkill.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: Exkill.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Exkill.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
