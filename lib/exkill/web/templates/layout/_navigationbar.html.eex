@@ -1,0 +1,134 @@
+{% if headerImage is defined %}
+	<div class="container">
+		<div class="navbar-header topimage">
+			<a href="/"><img src="{{ headerImage }}" alt=""></a>
+		</div>
+	</div>
+{% endif %}
+<div class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle openMenu" data-toggle="collapse" data-target=".navbar-main">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/"><img src='//{{ siteurl }}/img/wreck.png'/> {% if KillboardName %}{{ KillboardName }}{% else %}zKillboard{% endif %}</a>
+		</div>
+		<div class="collapse navbar-collapse navbar-main">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/br/list/">Battles</a></li>
+						<li><a href="/wars/">Wars</a></li>
+						<li><a href="/intel/supers/">Intel - Supers</a></li>
+						<li><a href="/ranks/recent/killers">Top Ranks</a></li>
+						<li class="divider"></li>
+						<li><a href="/kills/bigkills/">Big Kills</a></li>
+						<li><a href="/kills/citadels/">Citadels</a></li>
+						<li><a href="/kills/awox/">Awox</a></li>
+						<li><a href="/kills/w-space/">W-Space</a></li>
+						<li><a href="/kills/highsec/">Highsec</a></li>
+						<li><a href="/kills/lowsec/">Lowsec</a></li>
+						<li><a href="/kills/nullsec/">Nullsec</a></li>
+						<li><a href="/kills/solo/">Solo</a></li>
+						<li><a href="/kills/5b/">+5b</a></li>
+						<li><a href="/kills/10b">+10b</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Hull Sizes</li>
+						<li><a href="/kills/capitals/">Capitals</a></li>
+						<li><a href="/kills/freighters/">Freighters</a></li>
+						<li><a href="/kills/supers/">Supers</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">DUST 514</li>
+						<li><a href="/kills/dust/">All Kills</a></li>
+						<li><a href="/kills/dust_vehicles/">Vehicles</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tracker <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						{% if sessionusername %}
+						{% if tracker_character %}
+						<li class="dropdown-header">Characters</li>
+						{% for data in tracker_character %}
+						<li><a href="/character/{{ data.id }}/">{{ data.name }}</a></li>
+						{% endfor %}
+						{% endif %}
+						{% if tracker_corporation %}
+						<li class="dropdown-header">Corporations</li>
+						{% for data in tracker_corporation %}
+						<li><a href="/corporation/{{ data.id }}/">{{ data.name }}</a></li>
+						{% endfor %}
+						{% endif %}
+						{% if tracker_alliance %}
+						<li class="dropdown-header">Alliances</li>
+						{% for data in tracker_alliance %}
+						<li><a href="/alliance/{{ data.id }}/">{{ data.name }}</a></li>
+						{% endfor %}
+						{% endif %}
+						{% if tracker_faction %}
+						<li class="dropdown-header">Factions</li>
+						{% for data in tracker_faction %}
+						<li><a href="/faction/{{ data.id }}/">{{ data.name }}</a></li>
+						{% endfor %}
+						{% endif %}
+						{% else %}
+						<li>Please log in first.</li>
+						{% endif %}
+					</ul>
+				</li>
+				<li class="hidden-xs hidden-sm"><a href="/post/">Post</a></li>
+				<li class="hidden-xs hidden-sm"><a href="/map/">Map</a></li>
+				{% if statslink %}
+					<li class="hidden-xs hidden-sm"><a href="{{ statslink }}">Stats</a></li>
+				{% endif %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="hidden-xs hidden-sm"><a href="/top/lasthour/" rel="tooltip" title="Kills added this hour" id="lasthour">{{ killsLastHour | number_format(0)}}</a></li>
+				<li class="hidden-xs hidden-sm"><a href="#" rel="tooltip" title="Tranquility Status"><span id="tqStatus">{% if tqStatus == 'OFFLINE'%}<span class="red">TQ {{ tqCount }}</span>{% else %} <span class="green">TQ {{ tqCount }}</span>{% endif %}</span></a></li>
+				<li class="hidden-xs hidden-sm"><a href="#" onclick="return false;" rel="tooltip" title="Eve Time"><div id="my_clock"></div></a></li>
+				<li>
+					<form name="search" id="search" class="navbar-form navbar-right" action="/search/" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" autocomplete="off" id="searchbox" name="searchbox" tabindex="1">
+						</div>
+					</form>
+				</li>
+				<li class="dropdown hidden-xs">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-info"></i> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Information</li>
+						<li><a href="/information/about/">About</a></li>
+						<li><a href="https://github.com/zKillboard/zKillboard/wiki" target="_blank">API</a></li>
+						<li><a href="/information/faq/">FAQ</a></li>
+						<li><a href="/information/legal/">Legal</a></li>
+						<li><a href="/information/payments/">Payments</a></li>
+					</ul>
+				</li>
+				<li class="dropdown hidden-xs">
+					<a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown">{% if characterID > 0 %}<img src="https://image.eveonline.com/Character/{{ characterID }}_32.jpg" style='padding: 0px; margin: 0px; margin-top: -8px;'/>{% else %}<i class="fa fa-user" id='fauser'></i>{% endif %}<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle hidden-lg hidden-md hidden-sm" data-toggle="dropdown">Account <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% if sessionusername %}
+							<li class="dropdown-header">{{ sessionusername }}</li>
+							<li><a href="/account/">Account</a></li>
+							<li><a href="/account/api/">API</a></li>
+							<li><a href="/account/payments/">Payments</a></li>
+							<li><a href="/tickets/">Tickets</a></li>
+							<li class="divider hidden-xs"></li>
+							<li><a href="/logout/">Logout</a></li>
+						{% else %}
+							<form action="/ccplogin/" id="loginform">
+								<label class="checkbox"><input type="checkbox" name="scopes[]" value="characterFittingsWrite" checked>Allow zKillboard to write Fittings</label>
+								<label class="checkbox"><input type="checkbox" name="scopes[]" value="characterKillsRead" checked>Allow zKillboard to read your Kills</label>
+								<input type="image" src="/img/ssologin.png">
+							</form>
+						{% endif %}
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
