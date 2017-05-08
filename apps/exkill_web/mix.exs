@@ -39,8 +39,8 @@ defmodule ExkillWeb.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.13"},
      {:cowboy, "~> 1.0"},
-     {:mongodb, "~> 0.2"},
      {:poolboy, "~> 1.5"},
-     {:httpoison, "~> 0.11"}]
+     {:httpoison, "~> 0.11"},
+     {:exkill_mongo, in_umbrella: true}]
   end
 end

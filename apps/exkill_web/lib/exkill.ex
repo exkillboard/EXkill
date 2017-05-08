@@ -9,10 +9,9 @@ defmodule ExkillWeb do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      supervisor(ExkillWeb.Web.Endpoint, []),
+      supervisor(ExkillWeb.Web.Endpoint, [])
       # Start your own worker by calling: ExkillWeb.Worker.start_link(arg1, arg2, arg3)
       # worker(ExkillWeb.Worker, [arg1, arg2, arg3]),
-      worker(MongoPool, [[name: :mongo, database: "test", pool: DBConnection.Poolboy]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
