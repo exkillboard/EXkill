@@ -38,6 +38,7 @@ defmodule ExkillMongo.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-     {:mongodb, "~> 0.2"}]
+     {:mongodb, "~> 0.2"},
+     {:poolboy, "~> 1.5"}]
   end
 end
