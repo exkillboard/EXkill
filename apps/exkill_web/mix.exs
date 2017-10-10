@@ -33,13 +33,12 @@ defmodule ExkillWeb.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
+    [{:phoenix, "~> 1.3.0"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.13"},
      {:cowboy, "~> 1.0"},
-     {:poolboy, "~> 1.5"},
      {:httpoison, "~> 0.11"},
      {:exkill_mongo, in_umbrella: true}]
   end
