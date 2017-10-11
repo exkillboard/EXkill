@@ -12,7 +12,7 @@ defmodule ExkillMongo.Application do
     children = [
       # Starts a worker by calling: ExkillMongo.Worker.start_link(arg1, arg2, arg3)
       # worker(ExkillMongo.Worker, [arg1, arg2, arg3]),
-      worker(MongoPool, [[name: :mongo, database: "test", pool: DBConnection.Poolboy]])
+      # worker(MongoPool, [[name: :mongo, database: "test", pool: DBConnection.Poolboy]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

@@ -33,7 +33,7 @@ defmodule ExkillWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "web/ExkillWeb/templates",
+      use Phoenix.View, root: "lib/exkill_web/templates",
                         namespace: ExkillWeb
 
       # Import convenience functions from controllers

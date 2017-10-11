@@ -2,7 +2,7 @@ defmodule ExkillWeb.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ExkillWeb,
+    [app: :exkill_web,
      version: "0.0.1",
      elixir: "~> 1.5",
      build_path: "../../_build",

@@ -13,7 +13,7 @@ cd ExkillWeb
 **SOON TM**
 Then you will want to update your database information on the `config/config.exs` file, to supply the one of the project mongo. You will need to ask to get access in the slack channel.
 ```elixir
-config :ExkillWeb, ExkillWeb.Mongo,
+config :exkill_web, ExkillWeb.Mongo,
   hostname: "the_url",
   port: secret_port,
   database: "zkillboard",

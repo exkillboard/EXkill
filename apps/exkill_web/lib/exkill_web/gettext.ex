@@ -20,5 +20,5 @@ defmodule ExkillWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :ExkillWeb
+  use Gettext, otp_app: :exkill_web
 end
