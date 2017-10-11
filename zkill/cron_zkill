@@ -1,1 +1,3 @@
-* * * * * root /code/zKillboard/cron/cron.sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+* * * * * root  /code/zKillboard/cron/cron.sh
