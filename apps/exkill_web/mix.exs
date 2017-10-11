@@ -4,7 +4,7 @@ defmodule ExkillWeb.Mixfile do
   def project do
     [app: :ExkillWeb,
      version: "0.0.1",
-     elixir: "~> 1.4",
+     elixir: "~> 1.5",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -21,8 +21,7 @@ defmodule ExkillWeb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {ExkillWeb, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
-                    :logger, :gettext, :mongodb, :poolboy, :httpoison]]
+     extra_applications: [:logger]]
   end
 
   # Specifies which paths to compile per environment.
