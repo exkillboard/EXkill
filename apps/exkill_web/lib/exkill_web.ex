@@ -1,12 +1,12 @@
-defmodule ExkillWeb.Web do
+defmodule ExkillWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use ExkillWeb.Web, :controller
-      use ExkillWeb.Web, :view
+      use ExkillWeb, :controller
+      use ExkillWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -24,17 +24,17 @@ defmodule ExkillWeb.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: ExkillWeb.Web
+      use Phoenix.Controller, namespace: ExkillWeb
 
-      import ExkillWeb.Web.Router.Helpers
-      import ExkillWeb.Web.Gettext
+      import ExkillWeb.Router.Helpers
+      import ExkillWeb.Gettext
     end
   end
 
   def view do
     quote do
       use Phoenix.View, root: "web/ExkillWeb/templates",
-                        namespace: ExkillWeb.Web
+                        namespace: ExkillWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -42,9 +42,9 @@ defmodule ExkillWeb.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ExkillWeb.Web.Router.Helpers
-      import ExkillWeb.Web.ErrorHelpers
-      import ExkillWeb.Web.Gettext
+      import ExkillWeb.Router.Helpers
+      import ExkillWeb.ErrorHelpers
+      import ExkillWeb.Gettext
     end
   end
 
@@ -57,7 +57,7 @@ defmodule ExkillWeb.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import ExkillWeb.Web.Gettext
+      import ExkillWeb.Gettext
     end
   end
 

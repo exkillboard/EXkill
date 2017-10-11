@@ -1,4 +1,4 @@
-defmodule ExkillWeb.Web.Gettext do
+defmodule ExkillWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 

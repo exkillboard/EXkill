@@ -20,7 +20,7 @@ defmodule ExkillWeb.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {ExkillWeb, []},
+    [mod: {ExkillWeb.Application, []},
      extra_applications: [:logger]]
   end
 

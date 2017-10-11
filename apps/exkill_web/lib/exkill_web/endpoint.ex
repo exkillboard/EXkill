@@ -1,7 +1,7 @@
-defmodule ExkillWeb.Web.Endpoint do
+defmodule ExkillWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ExkillWeb
 
-  socket "/socket", ExkillWeb.Web.UserSocket
+  socket "/socket", ExkillWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule ExkillWeb.Web.Endpoint do
     key: "_ExkillWeb_key",
     signing_salt: "LZqzyj61"
 
-  plug ExkillWeb.Web.Router
+  plug ExkillWeb.Router
 end

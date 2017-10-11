@@ -1,4 +1,4 @@
-defmodule ExkillWeb.Web.ErrorHelpers do
+defmodule ExkillWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

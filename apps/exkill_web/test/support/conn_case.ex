@@ -1,4 +1,4 @@
-defmodule ExkillWeb.Web.ConnCase do
+defmodule ExkillWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,10 +20,10 @@ defmodule ExkillWeb.Web.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import ExkillWeb.Web.Router.Helpers
+      import ExkillWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint ExkillWeb.Web.Endpoint
+      @endpoint ExkillWeb.Endpoint
     end
   end
 
