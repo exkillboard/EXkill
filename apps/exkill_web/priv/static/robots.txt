@@ -1,5 +1,47 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
-#
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-agent: *
-# Disallow: /
+User-agent: *
+Disallow: /api/*
+Disallow: */page/*
+Disallow: *stats*
+Disallow: *top*
+Disallow: *trophies*
+Disallow: /detail*
+Disallow: /navbar/
+Disallow: /br/*
+Disallow: /related/*
+Disallow: /partial/*
+sitemap: https://zkillboard.com/sitemaps/sitemaps.xml
+Crawl-delay: 1
+
+
+# too many repeated hits, too quick
+User-agent: litefinder
+Disallow: /
+
+# Yahoo. too many repeated hits, too quick
+User-agent: Slurp
+Disallow: /
+
+# too many repeated hits, too quick
+User-agent: Baidu
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: megaindex.com
+Disallow: /
+
+User-agent: grapeshot
+Disallow: /
+
+User-agent: NTbot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: sogou spider
+Disallow: /
