@@ -4,36 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="<%= description() %>">
-    <!-- TODO --><meta name="title" content="{{ pageTitle }} | {{ siteurl }}">
+    <meta name="title" content="<%= @page_title %> | Zkillboard">
     <meta name="keywords" content="eve-online, eve, ccp, ccp games, kills, kill, massively, multiplayer, online, role, playing, game, mmorpg, rank, isk, mmorpg, killboard, zkillboard">
     <meta name="robots" content="index,follow">
     <meta name="og:locale" content="en_US">
     <meta name="og:type" content="website">
-    <!-- TODO --><meta name="og:site_name" content="{{ siteurl }}">
-    <!-- TODO --><meta name="fb:app_id" content="{{ fbAppID }}">
+    <meta name="og:site_name" content="Zkillboard">
     <meta name="twitter:site" content="@zKillboard">
     <!-- TODO --><meta name="twitter:domain" content="{{ fullsiteurl }}">
-    <!-- TODO --><meta name="application-name" content="{{ siteurl }}"/>
+    <meta name="application-name" content="Zkillboard"/>
     <meta name="msapplication-TileColor" content="#000000"/>
     <meta name="mobile-web-app-capable" content="yes">
-    <!-- TODO --><link rel="shortcut icon" sizes="16x17" href="<%= ExkillWeb.Endpoint.static_path("/favicon.ico") %>" />
-      <!-- TODO --><meta name="twitter:title" content="{{ pageTitle }} | {{ siteurl }}">
+    <link rel="shortcut icon" sizes="16x16" href="<%= ExkillWeb.Endpoint.static_path("/favicon.ico") %>" />
+      <meta name="twitter:title" content="<%= @page_title %> | Zkillboard">
       <meta name="twitter:card" content="summary">
-      <!-- TODO --><meta name="twitter:description" content="<%= description() %>">
-      <!-- TODO --><meta name="twitter:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
-      <!-- TODO --><meta name="og:title" content="{{ siteurl }} / {{ pageTitle }}">
+      <meta name="twitter:description" content="<%= description() %>">
+      <meta name="twitter:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
+      <meta name="og:title" content="<%= @page_title %> | Zkillboard">
       <!-- TODO --><meta name="og:url" content="{{ fullsiteurl }}">
-      <!-- TODO --><meta name="og:description" content="<%= description() %>">
-      <!-- TODO --><meta name="og:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
+      <meta name="og:description" content="<%= description() %>">
+      <meta name="og:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
 
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <title>
+      Zkillboard
+    </title>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css">
 
-    <!-- TODO --><link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/style-edits/cyborg-main.css") %>">
-    <!-- TODO --><link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/datepicker.css") %>">
-    <!-- TODO --><link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/main.css") %>">
-    <link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/font-awesome.css") %>">
+    <link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/style-edits/cyborg-main.css") %>">
+    <link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/datepicker.css") %>">
+    <link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/main.css") %>">
+    <link rel="stylesheet" href="<%= ExkillWeb.Endpoint.static_path("/css/nprogress.css") %>">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css">
 
     <style type="text/css">
       .topBoxes td {
@@ -46,7 +50,7 @@
 
       <!-- The navbar -->
       <div class="container" style="mgin: 0px; padding: 0px;">
-        <%= render "_navigationbar.html", conn: @conn %>
+        <%= render "_navigation_bar.html", conn: @conn %>
       </div>
 
       <div class="container nobackground">
@@ -103,7 +107,7 @@
                 <script type="text/javascript" src="/js/reconnecting-websocket.js"></script>
 
     <script type="text/javascript">
-      var characterID = {{ characterID }};
+      var characterID = <%= characterID %>;
       var datepicker = $('.datepicker').datepicker({
         format: "mm/yyyy",
         viewMode: 1,

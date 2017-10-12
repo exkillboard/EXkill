@@ -1,0 +1,130 @@
+<div class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle openMenu" data-toggle="collapse" data-target=".navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="<%= ExkillWeb.Endpoint.static_path("/img/wreck.png") %>"/> zKillboard</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-main">
+      <ul class="nav navbar-nav">
+        <li class="dropdown hidden-xs hidden-sm">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/kills/sponsored/">Sponsored</a></li>
+            <li><a href="/wars/">Wars</a></li>
+            <li><a href="/intel/supers/">Intel - Supers</a></li>
+            <li><a href="/ranks/recent/killers">Top Ranks</a></li>
+            <li class="divider"></li>
+            <li><a href="/kills/bigkills/">Big Kills</a></li>
+            <li><a href="/kills/rorquals/">Rorquals</a></li>
+            <li><a href="/kills/citadels/">Citadels</a></li>
+            <li><a href="/kills/awox/">Awox</a></li>
+            <li><a href="/kills/w-space/">W-Space</a></li>
+            <li><a href="/kills/highsec/">Highsec</a></li>
+            <li><a href="/kills/lowsec/">Lowsec</a></li>
+            <li><a href="/kills/nullsec/">Nullsec</a></li>
+            <li><a href="/kills/solo/">Solo</a></li>
+            <li><a href="/kills/5b/">+5b</a></li>
+            <li><a href="/kills/10b">+10b</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Hull Sizes</li>
+            <li><a href="/kills/capitals/">Capitals</a></li>
+            <li><a href="/kills/freighters/">Freighters</a></li>
+            <li><a href="/kills/supers/">Supers</a></li>
+          </ul>
+        </li>
+        <li class="dropdown hidden-xs hidden-sm" id="tracker-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tracker <b class="caret"></b></a>
+          <ul class="dropdown-menu" id='tracker-dropdown'>
+            <%= if session do %>
+              <%= if tracker_character do %>
+                <li class="dropdown-header">Characters</li>
+                <%= for data <- tracker_character do %>
+                  <li><a href="<%= "/character/#{data.id}/" %>" > <%= data.name %> </a></li>
+                <% end %>
+              <% end %>
+              <%= if tracker_corporation do %>
+                <li class="dropdown-header">Corporations</li>
+                <%= for data <- tracker_corporation do %>
+                  <li><a href="<%= "/corporation/#{data.id}/" %>" ><%= data.name %></a></li>
+                <% end %>
+              <% end %>
+              <%= if tracker_alliance do %>
+                <li class="dropdown-header">Alliances</li>
+                <%= for data <- tracker_alliance do %>
+                  <li><a href="<%= "/alliance/#{data.id}/" %>"><%= data.name %></a></li>
+                <% end %>
+              <% end %>
+              <%= if tracker_faction do %>
+                <li class="dropdown-header">Factions</li>
+                <%= for data <- tracker_faction do %>
+                  <li><a href="<%= "/faction/#{data.id}/" %>"><%= data.name %></a></li>
+                <% end %>
+              <% end %>
+            <% else %>
+              <li>Please log in first.</li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="hidden-xs hidden-sm"><a href="/post/">Post</a></li>
+        <li class="hidden-xs hidden-sm"><a href="/information/payments/"><img src='/img/golden-wreck.png'></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="hidden-xs hidden-sm"><a href="/top/lasthour/" rel="tooltip" title="Kills added this hour" id="lasthour">&nbsp;</a></li>
+        <li class="hidden-xs hidden-sm"><a href="#" rel="tooltip" title="Tranquility Status" onClick="return false;"><span id="tqStatus">&nbsp;</span></a></li>
+        <li class="hidden-xs hidden-sm hidden-md"><a href="#" onclick="return false;" rel="tooltip" title="Eve Time"><div id="my_clock"></div></a></li>
+        <li class="dropdown">
+          <form name="search" id="search" class="navbar-form navbar-right" action="/search/" method="post">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" autocomplete="off" id="searchbox" name="searchbox" tabindex="1">
+            </div>
+          </form>
+        </li>
+        <li class="dropdown visible-lg hidden-xs hidden-sm">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>?</strong> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Information</li>
+            <li><a href='/ztop/'>zTop - live stats</a></li>
+            <li><a href="/information/about/">About</a></li>
+            <li><a href="https://github.com/zKillboard/zKillboard/wiki" target="_blank">API</a></li>
+            <li><a href="/information/faq/">FAQ</a></li>
+            <li><a href="/information/legal/">Legal</a></li>
+            <li><a href="/information/payments/">Payments</a></li>
+          </ul>
+        </li>
+        <li id='usermenu' class="dropdown">
+          <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" id='usermenu-dropdown'>
+                                        <%= if characterID > 0 do %>
+                                          <img id='char-image' src="<%= "#{image_character}#{characterID}_32.jpg" %>" style='height: 32px; width: 32px; padding: 0px; margin: 0px; margin-top: -8px;'/>
+                                        <% else %>
+                                          <img id='char-image' src="/img/transparent_32.png" style='height: 32px; width: 32px; padding: 0px; margin: 0px; margin-top: -8px;'/>
+                                        <% end %>
+                                        <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle hidden-lg hidden-md hidden-sm" data-toggle="dropdown">Account <span class="caret"></span></a>
+            <ul class="dropdown-menu" id='char-loggedin'>
+              <li id='username' class="dropdown-header"><%= session %></li>
+              <li><a href="/account/">Account</a></li>
+              <li><a href="/account/api/">API</a></li>
+              <li><a href="/account/log/">Log</a></li>
+              <li><a href="/account/payments/">Payments</a></li>
+              <li><a href="/account/tickets/">Tickets</a></li>
+              <li class="divider hidden-xs"></li>
+              <li><a href="/account/logout/">Logout</a></li>
+            </ul>
+            <%= if characterID == 0 do %>
+              <ul class="dropdown-menu" id='char-loggedout'>
+              <form action="/ccplogin/" id="loginform">
+                <label class="checkbox"><input type="checkbox" name="scopes[]" value="characterFittingsWrite" checked>Allow zKillboard to save Fittings</label>
+                <label class="checkbox"><input type="checkbox" name="scopes[]" value="esi-killmails.read_killmails.v1" checked>Allow zKillboard to fetch killmails</label>
+                <input id='ssologinimage' type="image" src="/img/ssologin.png">
+              </form>
+              </ul>
+            <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

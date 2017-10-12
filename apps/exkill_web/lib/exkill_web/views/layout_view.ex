@@ -6,5 +6,10 @@ defmodule ExkillWeb.LayoutView do
   end
 
   def session, do: false
-  def tracker_character, do: false
+  def tracker_character, do: []
+  def tracker_corporation, do: []
+  def tracker_alliance, do: []
+  def tracker_faction, do: []
+  def characterID, do: 0
+  def image_character, do: ""
 end

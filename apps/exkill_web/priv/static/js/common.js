@@ -54,7 +54,7 @@ $(document).ready(function() {
     $('#searchbox').zz_search( function(data, event) { window.location = '/' + data.type + '/' + data.id + '/'; event.preventDefault(); } );
 
     //and for the tracker entity lookup
-    $('#addentitybox').zz_search( function(data) { 
+    $('#addentitybox').zz_search( function(data) {
         $('#addentity input[name="entitymetadata"]').val(JSON.stringify(data));
         $('#addentity input[name="addentitybox"]').val(data.name);
         $('#addentity').submit();
@@ -81,7 +81,6 @@ $(document).ready(function() {
     }
 
     $("#killmailurl").bind('paste', function(event) {
-        console.log(event);
         setTimeout(sendCrestUrl, 1);
     });
 
@@ -93,7 +92,7 @@ $(document).ready(function() {
 
 });
 
-function htmlNotify (data) 
+function htmlNotify (data)
 {
     if("Notification" in window) {
         if (Notification.permission !== 'denied' && Notification.permission !== "granted") {
@@ -119,7 +118,6 @@ function wslog(msg)
 {
     if (msg == 'ping' || msg == 'pong') return;
     json = JSON.parse(msg);
-    console.log(json);
     if (json.action == 'tqStatus') {
         tqStatus = json.tqStatus;
         tqCount = json.tqCount;
