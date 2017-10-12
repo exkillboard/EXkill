@@ -5,6 +5,8 @@ defmodule ExkillMongo.Application do
 
   use Application
 
+  @mongo_options [name: :mongo, database: "zkillboard", pool: DBConnection.Poolboy, hostname: "mongo"]
+
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
@@ -12,7 +14,7 @@ defmodule ExkillMongo.Application do
     children = [
       # Starts a worker by calling: ExkillMongo.Worker.start_link(arg1, arg2, arg3)
       # worker(ExkillMongo.Worker, [arg1, arg2, arg3]),
-      # worker(MongoPool, [[name: :mongo, database: "test", pool: DBConnection.Poolboy]])
+      worker(Mongo, [@mongo_options])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
