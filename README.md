@@ -40,6 +40,13 @@ Then all you have to do is
 ```
 to get a shell in the full environment.
 
+You may want to seed the mongo database
+```
+#bash> mix run apps/exkill_mongo/priv/seed.exs
+```
+
+It may take up to a minute for the zKillboard background workers to fetch and populate the database.
+
 If you want to see the website running, you can then type
 ```
 #bash> mix phx.server
