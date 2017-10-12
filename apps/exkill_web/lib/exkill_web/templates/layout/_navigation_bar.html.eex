@@ -39,28 +39,28 @@
         <li class="dropdown hidden-xs hidden-sm" id="tracker-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tracker <b class="caret"></b></a>
           <ul class="dropdown-menu" id='tracker-dropdown'>
-            <%= if session do %>
-              <%= if tracker_character do %>
+            <%= if session() do %>
+              <%= if tracker_character() do %>
                 <li class="dropdown-header">Characters</li>
-                <%= for data <- tracker_character do %>
+                <%= for data <- tracker_character() do %>
                   <li><a href="<%= "/character/#{data.id}/" %>" > <%= data.name %> </a></li>
                 <% end %>
               <% end %>
-              <%= if tracker_corporation do %>
+              <%= if tracker_corporation() do %>
                 <li class="dropdown-header">Corporations</li>
-                <%= for data <- tracker_corporation do %>
+                <%= for data <- tracker_corporation() do %>
                   <li><a href="<%= "/corporation/#{data.id}/" %>" ><%= data.name %></a></li>
                 <% end %>
               <% end %>
-              <%= if tracker_alliance do %>
+              <%= if tracker_alliance() do %>
                 <li class="dropdown-header">Alliances</li>
-                <%= for data <- tracker_alliance do %>
+                <%= for data <- tracker_alliance() do %>
                   <li><a href="<%= "/alliance/#{data.id}/" %>"><%= data.name %></a></li>
                 <% end %>
               <% end %>
-              <%= if tracker_faction do %>
+              <%= if tracker_faction() do %>
                 <li class="dropdown-header">Factions</li>
-                <%= for data <- tracker_faction do %>
+                <%= for data <- tracker_faction() do %>
                   <li><a href="<%= "/faction/#{data.id}/" %>"><%= data.name %></a></li>
                 <% end %>
               <% end %>
@@ -97,15 +97,15 @@
         </li>
         <li id='usermenu' class="dropdown">
           <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" id='usermenu-dropdown'>
-                                        <%= if characterID > 0 do %>
-                                          <img id='char-image' src="<%= "#{image_character}#{characterID}_32.jpg" %>" style='height: 32px; width: 32px; padding: 0px; margin: 0px; margin-top: -8px;'/>
+                                        <%= if characterID() > 0 do %>
+                                          <img id='char-image' src="<%= "#{image_character()}#{characterID()}_32.jpg" %>" style='height: 32px; width: 32px; padding: 0px; margin: 0px; margin-top: -8px;'/>
                                         <% else %>
                                           <img id='char-image' src="/img/transparent_32.png" style='height: 32px; width: 32px; padding: 0px; margin: 0px; margin-top: -8px;'/>
                                         <% end %>
                                         <span class="caret"></span></a>
           <a href="#" class="dropdown-toggle hidden-lg hidden-md hidden-sm" data-toggle="dropdown">Account <span class="caret"></span></a>
             <ul class="dropdown-menu" id='char-loggedin'>
-              <li id='username' class="dropdown-header"><%= session %></li>
+              <li id='username' class="dropdown-header"><%= session() %></li>
               <li><a href="/account/">Account</a></li>
               <li><a href="/account/api/">API</a></li>
               <li><a href="/account/log/">Log</a></li>
@@ -114,7 +114,7 @@
               <li class="divider hidden-xs"></li>
               <li><a href="/account/logout/">Logout</a></li>
             </ul>
-            <%= if characterID == 0 do %>
+            <%= if characterID() == 0 do %>
               <ul class="dropdown-menu" id='char-loggedout'>
               <form action="/ccplogin/" id="loginform">
                 <label class="checkbox"><input type="checkbox" name="scopes[]" value="characterFittingsWrite" checked>Allow zKillboard to save Fittings</label>
