@@ -12,4 +12,8 @@ defmodule ExkillWeb.LayoutView do
   def tracker_faction, do: []
   def characterID, do: 0
   def image_character, do: ""
+  def apiStatus, do: false
+  def accountBalance, do: 0
+  def adFreeMonthCost, do: 0
+  def showAds, do: false
 end

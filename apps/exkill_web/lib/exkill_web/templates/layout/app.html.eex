@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="<%= description() %>">
-    <meta name="title" content="<%= @page_title %> | Zkillboard">
+    <meta name="title" content="<%= @page_title %> | exKillboard">
     <meta name="keywords" content="eve-online, eve, ccp, ccp games, kills, kill, massively, multiplayer, online, role, playing, game, mmorpg, rank, isk, mmorpg, killboard, zkillboard">
     <meta name="robots" content="index,follow">
     <meta name="og:locale" content="en_US">
     <meta name="og:type" content="website">
-    <meta name="og:site_name" content="Zkillboard">
+    <meta name="og:site_name" content="exKillboard">
     <meta name="twitter:site" content="@zKillboard">
     <!-- TODO --><meta name="twitter:domain" content="{{ fullsiteurl }}">
     <meta name="application-name" content="Zkillboard"/>
     <meta name="msapplication-TileColor" content="#000000"/>
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" sizes="16x16" href="<%= ExkillWeb.Endpoint.static_path("/favicon.ico") %>" />
-      <meta name="twitter:title" content="<%= @page_title %> | Zkillboard">
+      <meta name="twitter:title" content="<%= @page_title %> | exKillboard">
       <meta name="twitter:card" content="summary">
       <meta name="twitter:description" content="<%= description() %>">
       <meta name="twitter:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
-      <meta name="og:title" content="<%= @page_title %> | Zkillboard">
+      <meta name="og:title" content="<%= @page_title %> | exKillboard">
       <!-- TODO --><meta name="og:url" content="{{ fullsiteurl }}">
       <meta name="og:description" content="<%= description() %>">
       <meta name="og:image" content="<%= ExkillWeb.Endpoint.static_path("/img/3D.png") %>">
@@ -54,60 +54,60 @@
       </div>
 
       <div class="container nobackground">
-        {% if crestStatus %}
-          <div class="alert alert-danger" style="font-weight: bold"><center>{{ crestStatus|raw }}</center></div>
-        {% endif %}
+        <%= if apiStatus() and @conn.request_path == "/" do %>
+          <div class="alert alert-danger" style="font-weight: bold"><center> <%= "#{apiStatus}" %> </center></div>
+        <% end %>
 
 
         <!-- Account balance information -->
-        {% if accountBalance >= adFreeMonthCost and accountBalance > 0 %}
-          <div class="alert alert-success" style="font-weight: bold"><center><a href='/account/payments'>You have an account balance of {{ accountBalance|number_format(2) }} ISK.  Click here to do something with it!</a></center></div>
-        {% endif %}
+        <%= if accountBalance() >= adFreeMonthCost() and accountBalance() > 0  do %>
+          <div class="alert alert-success" style="font-weight: bold"><center><a href='/account/payments'>You have an account balance of <%= accountBalance %> ISK.  Click here to do something with it!</a></center></div>
+        <% end %>
 
         <!-- Top ad -->
-        {% if showAds != false %}
+        <%= if showAds() != false do %>
           <div class="centered" id="adsensetop" style="margin-bottom: 5px;">
-            {{ topad|raw }}
+            <% "topad" %>
           </div>
-        {% endif %}
+        <% end %>
 
-        <!-- The text header -->
-        {% block header %}{% endblock %}
+        <!-- The text header  WOOT ?-->
+<%#         {% block header %}{% endblock %} %>
         <!-- The actual site content-->
         <%= render @view_module, @view_template, assigns %>
 
         <div class="clearfix"></div>
 
         <!-- Bottom ad -->
-        {% if showAds != false %}
+        <%= if showAds() != false do %>
           <br/><hr/><br/>
           <div class="centered" id="adsensebottom" style="margin-bottom: 5px;">
-            {{ bottomad|raw }}
+            <% "bottomad" %>
           </div>
-        {% endif %}
+        <% end %>
 
         <!-- Footer -->
         <div class="hidden-xs"><%= render "_footer.html", conn: @conn %></div>
       </div>
 
-      <!-- Modals -->
-      <div class="container">
-        {% block modal %}{% endblock %}
-      </div>
-    </div>
-
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.1.0/jquery.timeago.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js"></script>
     <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/bootstrap-datepicker.js") %>"></script>
     <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/search.js") %>"></script>
     <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/common.js?a=2") %>"></script>
     <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/sclock1.js") %>"></script>
-                <script type="text/javascript" src="/js/reconnecting-websocket.js"></script>
+    <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/nprogress.js") %>"></script>
+    <script type="text/javascript" src="/js/reconnecting-websocket.js"></script>
+    <script type="text/javascript" src="<%= ExkillWeb.Endpoint.static_path("/js/rankstablesort.js") %>"></script>
 
     <script type="text/javascript">
-      var characterID = <%= characterID() %>;
+      $(document).ready(function() {
+          if (navbar) $('#tracker-dropdown').load('/navbar/');
+      });
+
       var datepicker = $('.datepicker').datepicker({
         format: "mm/yyyy",
         viewMode: 1,
@@ -118,7 +118,7 @@
         date = new Date(ev.date);
         var year = date.getFullYear();
         var month = date.getMonth() +1;
-        location.href = '<%= @conn.request_path %>' + 'year/' + year + '/month/' + month + '/';
+        location.href = '{{ actualURI }}' + 'year/' + year + '/month/' + month + '/';
         console.log(month)
       });
     </script>
@@ -132,24 +132,53 @@
                 });
             });
         </script>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#216942",
-      "text": "#b2d192"
-    },
-    "button": {
-      "background": "transparent",
-      "text": "#afed71",
-      "border": "#afed71"
-    }
-  },
-  "showLink": false
-})});
-</script>
+
+
+    <div class="ttooltip hidden" id="ttooltip"><span class='X red' onclick="$('#ttooltip').addClass('hidden'); return false;">X</span><br/><span id='tipmsg'></span></div>
+    <div class="modal fade" id="modalMessage">
+            <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                    <h4 id='modalTitle' class="modal-title">Message</h4>
+                            </div>
+                            <div class="modal-body">
+                                    <form name="myform" class="form">
+              <span id='modalMessageBody'></span>
+                                    </form>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    <div class="modal fade" id="iframed">
+            <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                    <h4 class="modal-title">&lt;iframe&gt; detected</h4>
+                            </div>
+                            <div class="modal-body">
+            <p>exkillboard has detected that it has been embedded in an iframe.  We're ok with this, however, your experience might not be that great.  <a href="{{ fullsiteurl }}{{ requesturi}}" target="_blank">Click here to view this embedded window properly</a>, or just click anywhere below this dialog to view the iframe.</p>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#216942",
+          "text": "#b2d192"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#afed71",
+          "border": "#afed71"
+        }
+      },
+      "showLink": false
+    })});
+  </script>
   </body>
 </html>
