@@ -1,0 +1,30 @@
+<div class="container" style='width: 100%'>
+<center><h4><%= @title %></h4></center>
+<div class="clearfix"></div>
+<div class="clearfix"></div>
+<%= for data <- @top_set do %>
+  <div class="col-lg-2 pull-left" style="width: 16.6%; text-align: center; height: 180px;">
+    <div class="hidden-xs" style='width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'>
+      <%= render "text_ship.html", field: data.victim, ship_image_link_override: data.killID, image_size: 96 %>
+    </div>
+      <%= render "image_ship.html", field: data.victim, ship_image_link_override: data.killID, image_size: 96 %> <br/>
+    <h6><%= data.zkb.totalValue %> ISK</h6>
+    <span class="hidden-xs">
+      <%= if data.victim.characterName != "" do %>
+        <%= if data.victim.characterID == nil and data.victim.ceoID != nil  and data.victim.ceoName != nil do %>
+          <a href="/character/<%= data.victim.ceoID %>/"><%= data.victim.ceoName %></a>
+        <% else %>
+          <a href="/character/<%=  data.victim.characterID %>/"><%= data.victim.characterName %></a>
+        <% end %></td>
+    <% else %>
+      <% if data.victim.executorCorpID and data.victim.executorCorpName do %>
+        <a href="/corporation/<%=  data.victim.executorCorpID %>/"><%= data.victim.executorCorpName %></a>
+      <% else %>
+        <a href="/corporation/<%=  data.victim.corporationID %>/"><%= data.victim.corporationName %></a>
+      <% end %>
+    <% end %><br/>
+    </span>
+    <br/>
+  </div>
+<% end %>
+</div>

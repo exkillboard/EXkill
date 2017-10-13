@@ -1,36 +1,23 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+{% set killListTitle = 'Most recent kills' %}
+{% set killList = kills %}
+<div class="row">
+<div class="col-sm-10 pull-left" style="padding-left: 0px;">
+  <div>
+    <%= render ExkillWeb.ComponentsView, "big_top_list.html", title: "Most Valuable Kills - Last 7 Days", top_set: @top_isk %>
+    <%= render ExkillWeb.ComponentsView, "big_top_list.html", title: "Sponsored Killmails - Last 7 Days", top_set: @sponsored %>
+  </div>
+  <div class="clearfix"></div>
+{% include 'components/kill_list.html' %}
 </div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
+<div class="col-sm-2 pull-left" style="padding: 0px;">
+        <center><a href='/top/lasthour/'>Current Activity</a></center>
+  {% include 'components/activePvP.html' %}<div class='clearfix'></div><br/>
+        {% include 'components/tracked_items.html' %}<br/>
+  {% set isEmbedded = true %}
+  {% for topSet in topKillers %}
+  {% include 'components/top_killer_list.html' %}
+  {% endfor %}
+{% if topSet|length %}<br/><center><em><small>7 Day Top Killers<br/><a href='https://www.reddit.com/r/Eve/comments/42hipd/zkillboards_weekly_rankings_explained/' target='_blank'>Rankings Explained</a></em></small></center>{% endif %}
+  {% include 'components/donations.html' %}
+</div>
 </div>

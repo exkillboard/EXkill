@@ -1,0 +1,5 @@
+<%= if @ship_image_link_override > 0 do %>
+  <a href="/kill/<=% ship_image_link_override %>/" rel="tooltip" title="Detail for {{shipImageLinkOverride}}"><%= @field.shipName %></a>
+<% else %>
+  <a href="/ship/<=% @field.shipTypeID  %>/"><%= @field.shipName %></a>
+<% end %>
