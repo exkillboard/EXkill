@@ -1,0 +1,23 @@
+<div class="pull-right">
+  <ul class="pagination pagination-sm">
+      <%= if @page == 2 do %>
+        <li><a href="<%= @page_base %>" rel="nofollow prev">&laquo;</a></li>
+      <% else %>
+        <%= if @page > 2 do %>
+          <li><a href="<%= @page_base %>/page/<%= @page - 1 %>/" rel="nofollow prev">&laquo;</a></li>
+        <% end %>
+      <% end %>
+
+      <% start_index = if @page > 3, do: @page - 3, else: 1 %>
+      <% end_index = @page + 3 %>
+
+      <%= for page_index <- start_index..end_index do %>
+        <%= if page_index > 1 do %>
+          <li class="{{ isActive(pageIndex, page, 'active') }}"><a href="{{ pageBase }}page/{{pageIndex}}/" rel="nofollow">{{ pageIndex }}</a></li>
+        <% else %>
+          <li class="{{ isActive(pageIndex, page, 'active') }}"><a href="{{ pageBase }}" rel="nofollow">{{ pageIndex }}</a></li>
+        <% end %>
+      <% end %>
+      <li><a href="{{ pageBase }}page/{{ page + 1 }}/" rel="nofollow next">&raquo;</a></li>
+  </ul>
+</div>
