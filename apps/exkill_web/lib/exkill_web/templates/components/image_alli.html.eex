@@ -1,0 +1,5 @@
+<%= if @field.allianceID != 0 do %>
+<a href="/alliance/<%= @field.allianceID %>/" rel="tooltip" title="<%= @field.allianceName %>">
+  <img src="<%= image_url(:image_alliance, @field.allianceID, @image_size) %>" style='height: <%= @display_size %>px; width: <%= @display_size %>px;' class="eveimage img-rounded" alt="<%= @field.allianceName %>"/>
+</a>
+<% end %>

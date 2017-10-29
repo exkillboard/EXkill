@@ -10,6 +10,6 @@
   <% end %>
   <% source = if @image_size > 64, do: :image_ship, else: :image_item %>
   <a href="<%= url %>" rel="tooltip" title="<%=title %>" class="">
-    <img src="<%= image_url(source, @field.shipTypeID, @image_size) %>" style='height: <%= @image_size %>px; width: <%= @image_size %>px;' class="eveimage img-rounded" alt="<%= @field.shipName %>"/>
+    <img src="<%= image_url(source, @field.shipTypeID, @image_size) %>" style='height: <%= @display_size %>px; width: <%= @display_size %>px;' class="eveimage img-rounded" alt="<%= @field.shipName %>"/>
   </a>
 <% end %>

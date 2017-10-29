@@ -6,7 +6,7 @@
   </div>
   <div class="clearfix"></div>
 {% include 'components/kill_list.html' %}
-<%= render ExkillWeb.ComponentsView, "kill_list.html", kill_list: @kills, kill_list_title: "Most recent kills", page_base: "/kills/" %>
+<%= render ExkillWeb.ComponentsView, "kill_list.html", kill_list: @kills, kill_list_title: "Most recent kills", page_base: "/kills/", page_type: "overview" %>
 </div>
 <div class="col-sm-2 pull-left" style="padding: 0px;">
         <center><a href='/top/lasthour/'>Current Activity</a></center>

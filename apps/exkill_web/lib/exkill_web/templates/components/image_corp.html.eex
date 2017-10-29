@@ -1,0 +1,5 @@
+<%= if @field.corporationID != 0 do %>
+<a href="/corporation/<%= @field.corporationID %>/" rel="tooltip" title="<%= @field.corporationName %>">
+  <img src="<%= image_url(:image_corporation, @field.corporationID, @image_size) %>" style='height: <%= @display_size %>px; width: <%= @display_size %>px;' class="eveimage img-rounded" alt="<%= @field.corporationName %>"/>
+</a>
+<% end %>
