@@ -1,14 +1,11 @@
 {% set txtLength = 60 %}
-{% include 'components/pager.html' %}
 <%= render ExkillWeb.ComponentsView, "pager.html", date: DateTime.utc_now(), page_base: @page_base, page: 1 %>
-{% if killList|length == 0 %}
-  <h4>{{ killListTitle }}</h4>
+<%= if length(@kill_list) == 0 do %>
+  <h4><%= @kill_list_title %></h4>
   <div class="alert"><em>Nothing to display here...</em></div>
-{% else %}
-  <h3 class="pull-left">{{ killListTitle }}</h3>
-  {% set CurrentYear = '' %}
-  {% set CurrentMonth = '' %}
-  {% set CurrentDay = ''%}
+<% else %>
+  <h3 class="pull-left"><%= @kill_list_title %></h3>
+  <% current_date = nil %>
   <div class="clearfix"></div>
   <table class="table table-condensed table-striped table-hover" style="margin-bottom: 0px;">
   <thead>
@@ -23,78 +20,84 @@
     </tr>
   </thead>
   <tbody>
-    {% for kill in killList if kill.killID > 0 %}
-      {% set shipImageLinkOverride = kill.killID %}
-      {% set date = (kill.dttm.sec|date('M d, Y')) %}
-      {% if currentDate != date %}
-        {% set currentDate = (kill.dttm.sec|date('M d, Y')) %}
+    <%= for kill <- @kill_list do %>
+      <% datetime = DateTime.from_unix!(kill.dttm.sec) %>
+      <%= if current_date != DateTime.to_date(datetime) do %>
+        <% current_date = DateTime.to_date(datetime) %>
         <tr>
-          <th class="no-stripe" colspan="7"><strong><em>{{ date }}</em></strong></th>
+          <th class="no-stripe" colspan="7"><strong><em><%= kb_date_format(datetime) %></em></strong></th>
         </tr>
-      {% endif %}
+      <% end %>
 
-      {% set imageSize = 64 %}
-      {% set resizeImage = 40 %}
-
-      {% set field = kill.victim %}
-      {% set lossDisplay = '' %}
-      {% if (kill.displayAsLoss == true and key != 'system' and key != 'region') or pageType == 'losses' %}{% set lossDisplay = ' error' %}{% elseif pageType == 'overview' or pageType == 'kills' or pageType == 'solo' or kill.displayAsKill == true %}{% set lossDisplay = ' winwin' %}{% endif %}
-      <tr class="killListRow{{lossDisplay}}" killID='{{ kill.killID }}' lick="if (event.which == 2) return false; window.location='/kill/{{kill.killID}}/'">
+      <%= cond do %> 
+        <% ((kill.displayAsLoss == true && @key != 'system' and @key != 'region') || @page_type == 'losses') -> %> <% lossDisplay = ' error' %>
+        <% (@page_type == 'overview' || @page_type == 'kills' || @page_type == 'solo' || kill.displayAsKill == true) -> %> <% lossDisplay = ' winwin' %>
+        <% true -> %> <%  lossDisplay = '' %> 
+      <% end %>
+      <tr class="killListRow<%= lossDisplay %>" killID='<%= kill.killID %>' lick="if (event.which == 2) return false; window.location='/kill/<%=kill.killID%>/'">
         <td style='width: 55px;'>
-          {{ kill.dttm.sec|date('H:i') }}
-          <br/><a href="/kill/{{ kill.killID }}/">{{ formatIsk(kill.zkb.totalValue) }}</a>
+          <%= kb_time_format(datetime) %>
+          <br/><a href="/kill/<%= kill.killID %>/"><%= kill.zkb.totalValue %></a>
         </td>
         <td class="icon hidden-xs" style="text-align: center; vertical-align: middle;">
-          {% include 'components/image_ship.html' %}
+          <%= render "image_ship.html", field: kill.victim, ship_image_link_override: kill.killID, image_size: 64, display_size: 40 %>
         </td>
         <td>
-          <div style='width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'><span style="color: {{ kill.system.systemColorCode }}">{{ "%1.1f"|format(kill.system.solarSystemSecurity) }}</span> <a href="/system/{{ kill.system.solarSystemID }}/">{{ kill.system.solarSystemName }}</a></div>
-          <a href="/region/{{ kill.system.regionID }}/">{{ kill.system.regionName }}</a>
+          <div style='width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'><span style="color: <%= kill.system.systemColorCode %>"><%= :erlang.float_to_binary(kill.system.solarSystemSecurity, [decimals: 1]) %></span> <a href="/system/<%= kill.system.solarSystemID %>/"><%= kill.system.solarSystemName %></a></div>
+          <a href="/region/<%= kill.system.regionID %>/"><%= kill.system.regionName %></a>
         </td>
         <td class="hidden-xs" style="text-align: center; vertical-align: middle; max-width: 64px;">
-          {% if kill.victim.allianceID != 0 %}
-            {% include 'components/image_alli.html' %}
-          {% else %}
-            {% include 'components/image_corp.html' %}
-          {% endif %}
+          <%= if kill.victim.allianceID != "0" do %>
+            <%= render "image_alli.html", field: kill.victim, image_size: 64, display_size: 40 %>
+          <% else %>
+            <%= render "image_corp.html", field: kill.victim, image_size: 64, display_size: 40 %>
+          <% end %>
         </td>
         <td class="victim" style="text-align: left; vertical-align: top; max-width: 290px;">
-          <a href="/character/{{ kill.victim.characterID }}/">{{ kill.victim.characterName }}</a> ({{ kill.victim.shipName }})<br />
-          {% if kill.victim.allianceID != 0 %}
-            <a href="/alliance/{{ kill.victim.allianceID }}/">{{ kill.victim.allianceName }}</a>
-          {% else %}
-            <a href="/corporation/{{ kill.victim.corporationID }}/">{{ kill.victim.corporationName }}</a>
-          {% endif %}
+          <a href="/character/<%= kill.victim.characterID %>/"><%= kill.victim.characterName %></a> (<%= kill.victim.shipName %>)<br />
+          <%= if kill.victim.allianceID != "0" do %>
+            <a href="/alliance/<%= kill.victim.allianceID %>/"><%= kill.victim.allianceName %></a>
+          <% else %>
+            <a href="/corporation/<%= kill.victim.corporationID %>/"><%= kill.victim.corporationName %></a>
+          <% end %>
         </td>
-        {% set field = kill.finalBlow %}
         <td class="hidden-xs" style="text-align: center; vertical-align: middle; max-width: 64px;">
-          {% if kill.finalBlow.allianceID != 0 %}
-            {% include 'components/image_alli.html' %}
-          {% else %}
-            {% include 'components/image_corp.html' %}
-          {% endif %}
+          <%= if kill.finalBlow.allianceID != "0" do %>
+            <%= render "image_alli.html", field: kill.finalBlow, image_size: 64, display_size: 40 %>
+          <% else %>
+            <%= render "image_corp.html", field: kill.finalBlow, image_size: 64, display_size: 40 %>
+          <% end %>
         </td>
         <td class="finalBlow hidden-xs" style="text-align: left; vertical-align: top; max-width: 290px;">
-          <a href="/character/{{ kill.finalBlow.characterID }}/">{{ kill.finalBlow.characterName }}</a>
-          {% if field.characterID == 0 %}
-    {% set shipImageLinkOverride = 0 %}
-                {% include 'components/text_ship.html' %}
-          {% endif %}
+          <a href="/character/<%= kill.finalBlow.characterID %>/"><%= kill.finalBlow.characterName %></a>
+          <% if kill.victim.characterID == "0" do %>
+            <%= render "text_ship.html", field: kill.victim, ship_image_link_override: 0 %>
+          <% end %>
 
-          {% if kill.solo == true %}<a href='/character/{{ kill.finalBlow.characterID }}/solo/'><small><font class="alert alert-success" style='padding: 0px; margin: 0px;'>&nbsp;SOLO&nbsp;</font></small></a> {% elseif kill.npc == true %} <small><font class="alert alert-info" style='padding: 0px; margin: 0px;'>&nbsp;npc&nbsp;</font></small> {% elseif kill.attackerCount >= 100 %} <small><font class="alert alert-warning" style='padding: 0px; margin: 0px;'>&nbsp;100+&nbsp;</font></small> {% else %} ({{ kill.attackerCount }}) {% endif %}<br />
+          <%= cond do %>
+            <% kill.solo == true -> %>
+              <a href='/character/<%= kill.finalBlow.characterID %>/solo/'><small><font class="alert alert-success" style='padding: 0px; margin: 0px;'>&nbsp;SOLO&nbsp;</font></small></a>
+            <% kill.npc == true -> %>
+              <small><font class="alert alert-info" style='padding: 0px; margin: 0px;'>&nbsp;npc&nbsp;</font></small>
+            <% kill.attackerCount >= 100 -> %>
+              <small><font class="alert alert-warning" style='padding: 0px; margin: 0px;'>&nbsp;100+&nbsp;</font></small>
+            <% true %>
+              (<%= kill.attackerCount %>)
+          <% end %>
+          <br />
 
-          {% if kill.finalBlow.allianceID != 0 %}
-            <a href="/alliance/{{ kill.finalBlow.allianceID }}/">{{ kill.finalBlow.allianceName }}</a>
-          {% else %}
-            <a href="/corporation/{{ kill.finalBlow.corporationID }}/">{{ kill.finalBlow.corporationName }}</a>
-          {% endif %}
-          {% if kill.finalBlow.factionID == 500021 %}
-            <a href="/faction/{{ kill.finalBlow.factionID }}/">Unknown</a>
-    {% endif %}
+          <%= if kill.finalBlow.allianceID != "0" do %>
+            <a href="/alliance/<%= kill.finalBlow.allianceID %>/"><%= kill.finalBlow.allianceName %></a>
+          <% else %>
+            <a href="/corporation/<%= kill.finalBlow.corporationID %>/"><%= kill.finalBlow.corporationName %></a>
+          <% end %>
+          <%= if kill.finalBlow.factionID == "500021" do %>
+            <a href="/faction/<%= kill.finalBlow.factionID %>/">Unknown</a>
+          <% end %>
         </td>
       </tr>
-    {% endfor %}
+    <% end %>
   </tbody>
 </table>
-{% include 'components/pager.html' %}
-{% endif %}
+<%= render ExkillWeb.ComponentsView, "pager.html", date: DateTime.utc_now(), page_base: @page_base, page: 1 %>
+<% end %>

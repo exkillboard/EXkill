@@ -7,7 +7,7 @@
     <div class="hidden-xs" style='width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'>
       <%= render "text_ship.html", field: data.victim, ship_image_link_override: data.killID, image_size: 96 %>
     </div>
-      <%= render "image_ship.html", field: data.victim, ship_image_link_override: data.killID, image_size: 96 %> <br/>
+      <%= render "image_ship.html", field: data.victim, ship_image_link_override: data.killID, image_size: 96, resize: 96 %> <br/>
     <h6><%= data.zkb.totalValue %> ISK</h6>
     <span class="hidden-xs">
       <%= if data.victim.characterName != "" do %>
