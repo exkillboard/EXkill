@@ -5,8 +5,7 @@
 Exkill is a rewrite of [zKillboard](https://zkillboard.com/) in Elixir, with a more up to date javascript and html code. It has to be a drop in replacement for existing part of zKillboard, so that it could be exchanged piecemeal "on the fly".
 
 ## Why ?
-![How hard can it be?]
-(http://i.imgur.com/RGSwt62.jpg)
+![How hard can it be?](http://i.imgur.com/RGSwt62.jpg)
 
 zKillboard is an amazing piece of software and a really great website that helps the full eve community. And we will never thank Squizz Caphinator enough for it.
 
