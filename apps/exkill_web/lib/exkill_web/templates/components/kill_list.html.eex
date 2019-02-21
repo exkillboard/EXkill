@@ -29,10 +29,10 @@
         </tr>
       <% end %>
 
-      <%= cond do %> 
-        <% ((kill.displayAsLoss == true && @key != 'system' and @key != 'region') || @page_type == 'losses') -> %> <% lossDisplay = ' error' %>
-        <% (@page_type == 'overview' || @page_type == 'kills' || @page_type == 'solo' || kill.displayAsKill == true) -> %> <% lossDisplay = ' winwin' %>
-        <% true -> %> <%  lossDisplay = '' %> 
+      <% lossDisplay = cond do %>
+        <% ((kill.displayAsLoss == true && @key != "system" and @key != "region") || @page_type == "losses") -> %> <% " error" %>
+        <% (@page_type == "overview" || @page_type == "kills" || @page_type == "solo" || kill.displayAsKill == true) -> %> <% " winwin" %>
+        <% true -> %> <% "" %>
       <% end %>
       <tr class="killListRow<%= lossDisplay %>" killID='<%= kill.killID %>' lick="if (event.which == 2) return false; window.location='/kill/<%=kill.killID%>/'">
         <td style='width: 55px;'>

@@ -55,19 +55,19 @@
 
       <div class="container nobackground">
         <%= if apiStatus() and @conn.request_path == "/" do %>
-          <div class="alert alert-danger" style="font-weight: bold"><center> <%= "#{apiStatus}" %> </center></div>
+          <div class="alert alert-danger" style="font-weight: bold"><center> <%= "#{apiStatus()}" %> </center></div>
         <% end %>
 
 
         <!-- Account balance information -->
-        <%= if accountBalance() >= adFreeMonthCost() and accountBalance() > 0  do %>
-          <div class="alert alert-success" style="font-weight: bold"><center><a href='/account/payments'>You have an account balance of <%= accountBalance %> ISK.  Click here to do something with it!</a></center></div>
+        <%= if accountBalance() > adFreeMonthCost() do %>
+          <div class="alert alert-success" style="font-weight: bold"><center><a href='/account/payments'>You have an account balance of <%= accountBalance() %> ISK.  Click here to do something with it!</a></center></div>
         <% end %>
 
         <!-- Top ad -->
         <%= if showAds() != false do %>
           <div class="centered" id="adsensetop" style="margin-bottom: 5px;">
-            <% "topad" %>
+            <%# TOP AD %>
           </div>
         <% end %>
 
